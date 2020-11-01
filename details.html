@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="fr">
+
+<head>
+    <script src="assets/js/templates.js"></script>
+    <script>document.write(head('Détails | Paulciné'))</script>
+</head>
+
+<body>
+    <script>document.write(navBar)</script>
+
+    <header class="jumbotron container bg-info text-light mt-5">
+        <h1 class="display-2">Détails</h1>
+    </header>
+    <main class="container">
+        <img src="" alt="poster" id="poster">
+        <h1 class="display-4 text-info border-bottom border-info" id="title">Titre</h1>
+        <strong>Synopsis</strong>
+        <p id="synopsis">Lorem ipsum dolor sit amet consectetur adipisicing elit. Culpa dolores fugit quia reiciendis cum commodi sequi labore ad nemo accusantium, quas nostrum non nobis suscipit laudantium modi quaerat repudiandae aliquam ullam! Tempore nisi ratione voluptatibus est esse totam cum nobis.</p>
+    </main>
+    <footer class="jumbotron container bg-info text-light mt-5">
+        <h3 class="display-4">&copy;2020</h3>
+    </footer>
+</body>
+
+</html>
+<script>
+    var apiKey = '79512fb2f68dec197f295a410d1dafc0';
+    
+
+    var searchParams = new URLSearchParams(window.location.search);
+
+    var id;
+    if(searchParams.has('id'))
+        id = searchParams.get('id')
+
+    var url = 'https://api.themoviedb.org/3/movie/'+id+'?api_key=' + apiKey;
+    var urlImage = 'https://image.tmdb.org/t/p/w300/';
+
+    $.getJSON(url, function (data) {
+        
+        var title;
+
+        if(data.title)
+            title = data.title;
+        else
+            title = data.name;
+            
+        var synopsis = data.overview;
+        var poster = data.poster_path;
+
+        $('#title').text(title);
+        $('#poster').attr('src', urlImage+poster);
+        $('#synopsis').text(synopsis);
+
+    });
+
+    /*
+    base link
+    
+    https://api.themoviedb.org/3/movie/550?api_key=79512fb2f68dec197f295a410d1dafc0
+    
+    image link
+    
+    https://image.tmdb.org/t/p/w300/zhPdYZ3x2uanhM1SyBj4CuL6hSa.jpg
+    */
+</script>

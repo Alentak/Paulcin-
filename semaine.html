@@ -35,26 +35,23 @@
 
             var title;
 
-            if(items[i].title)
-                title = items[i].title;
+            if(item.title)
+                title = item.title;
             else
-                title = items[i].name;
+                title = item.name;
                 
-            var synopsis = items[i].overview;
-            var poster = items[i].poster_path;
+            var poster = item.poster_path;
 
             var article =   `<div class="card" style="width: 17.3rem;">
-                                <img class="card-img-top" src="..." alt="Poster" name="image_`+i+`">
+                                <a href="details.html?id=`+item.id+`"><img class="card-img-top" src="..." alt="Poster" name="image_`+i+`"></a>
                                 <div class="card-body">
                                     <h5 class="card-title" name="title_`+i+`">Card title</h5>
-                                    <p class="card-text" name="presentation_`+i+`">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
                                 </div>
                             </div>`;
 
             $('#films').html($('#films').html() + article);
 
             $('[name=title_'+i+']').text(title);
-            $('[name=presentation_'+i+']').text(synopsis);
             $('[name=image_'+i+']').attr('src', urlImage + poster);
 
         }
