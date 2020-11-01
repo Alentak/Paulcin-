@@ -18,7 +18,7 @@ function head(title){
 var navBar = 
 `
 <nav class="navbar navbar-expand-lg navbar-dark bg-dark" style="position: fixed;top: 0;left: 0;right: 0;z-index: 10;">
-    <a class="navbar-brand" href="index.html">Paulcinet</a>
+    <a class="navbar-brand" href="./">Paulcinet</a>
     <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav"
         aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
         <span class="navbar-toggler-icon"></span>
