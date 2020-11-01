@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html lang="fr">
+
+<head>
+    <script src="assets/js/templates.js"></script>
+    <script>document.write(head('Actus de la semaine | Paulciné'))</script>
+</head>
+
+<body>
+    <script>document.write(navBar)</script>
+
+    <header class="jumbotron container bg-info text-light mt-5">
+        <h1 class="display-2">Actus de la semaine</h1>
+    </header>
+    <main class="container">
+        <section class="d-flex flex-wrap" id="films">
+        </section>
+    </main>
+    <footer class="jumbotron container bg-info text-light">
+        <h3>Footer 2020</h3>
+    </footer>
+</body>
+
+</html>
+<script>
+    var apiKey = '79512fb2f68dec197f295a410d1dafc0';
+    var url = 'https://api.themoviedb.org/3/trending/all/week?api_key=' + apiKey;
+    var urlImage = 'https://image.tmdb.org/t/p/w300/';
+
+    $.getJSON(url, function (data) {
+        var items = data.results;
+
+        for (let i = 0; i < items.length; i++) {
+            const item = items[i];
+
+            var title;
+
+            if(items[i].title)
+                title = items[i].title;
+            else
+                title = items[i].name;
+                
+            var synopsis = items[i].overview;
+            var poster = items[i].poster_path;
+
+            var article =   `<div class="card" style="width: 17.3rem;">
+                                <img class="card-img-top" src="..." alt="Poster" name="image_`+i+`">
+                                <div class="card-body">
+                                    <h5 class="card-title" name="title_`+i+`">Card title</h5>
+                                    <p class="card-text" name="presentation_`+i+`">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
+                                </div>
+                            </div>`;
+
+            $('#films').html($('#films').html() + article);
+
+            $('[name=title_'+i+']').text(title);
+            $('[name=presentation_'+i+']').text(synopsis);
+            $('[name=image_'+i+']').attr('src', urlImage + poster);
+
+        }
+    });
+
+    /*
+    base link
+    
+    https://api.themoviedb.org/3/movie/550?api_key=79512fb2f68dec197f295a410d1dafc0
+    
+    image link
+    
+    https://image.tmdb.org/t/p/w300/zhPdYZ3x2uanhM1SyBj4CuL6hSa.jpg
+    */
+</script>
