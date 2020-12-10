@@ -37,22 +37,27 @@
     var url = 'https://api.themoviedb.org/3/movie/'+id+'?api_key=' + apiKey;
     var urlImage = 'https://image.tmdb.org/t/p/w300/';
 
-    $.getJSON(url, function (data) {
-        
+    fetch(url)
+    .then(resp => resp.json())
+    .then(function (data){
         var title;
 
         if(data.title)
             title = data.title;
         else
             title = data.name;
-            
+
         var synopsis = data.overview;
         var poster = data.poster_path;
 
         $('#title').text(title);
         $('#poster').attr('src', urlImage+poster);
         $('#synopsis').text(synopsis);
-
+    })
+    .catch(erreur => {
+        // Il y a une erreur
+        console.error('Erreur !');
+        console.dir(erreur);
     });
 
     /*
